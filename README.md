@@ -11,7 +11,7 @@ AES is sufficiently secured for many IoT implementations. Cryptobits can be impl
 
 Cryptobits HTTP client is an implementation for [Arduino on ESP8266](https://github.com/esp8266/Arduino). It needs a cryptobits server on the other side. There is a PHP example.
 
-The following is a method to send and receive secure messages:
+The following is a method to send and receive secure messages. The device must already be connected to the network before calling this:
 ```cpp
 #include <cb_http_client.h>
 
@@ -23,5 +23,12 @@ cb_http_client my_client = cb_http_client(id, server_url, shared_key);
 
 String response;
 int stt = my_client.post("My message", response);
-Serial.println(response);
+Serial.println(String("Post status: ") + stt);
+Serial.println(String("Post response: ") + response);
 ```
+*stt* must return 0. Otherwise, please check the response code:
+```cpp
+int rc = my_client.getPostResponseCode();
+Serial.println(String("Post response code: ") + rc);
+```
+The code is defined in [ESP8266HTTPClient.h](https://github.com/esp8266/Arduino/blob/master/libraries/ESP8266HTTPClient/src/ESP8266HTTPClient.h).
