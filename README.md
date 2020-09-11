@@ -6,3 +6,22 @@ Cryptobits is a shared key messaging protocol based on [AES](https://en.wikipedi
 **{"a":"Terminal 1","m":"qLN5mK0c3yFKiaRmbAvjxwk+QSw+Ch3RC7o8+BxNI8c="}**
 
 AES is sufficiently secured for many IoT implementations. Cryptobits can be implemented in a microcontroller with a small memory and processing footprint. The messages can be delivered through various communication channels such as serial, wireless or WiFi. 
+
+### HTTP Client
+
+Cryptobits HTTP client is an implementation for [Arduino on ESP8266](https://github.com/esp8266/Arduino). It needs a cryptobits server on the other side. There is a PHP example.
+
+The following is a method to send and receive secure messages:
+```cpp
+#include <cb_http_client.h>
+
+String id = "Terminal 1";
+String server_url = "http://192.168.0.1/test.php";
+String shared_key = "2B7E151628AED2A6ABF7158809CF4F3C";
+
+cb_http_client my_client = cb_http_client(id, server_url, shared_key);
+
+String response;
+int stt = my_client.post("My message", response);
+Serial.println(response);
+```
