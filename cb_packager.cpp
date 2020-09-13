@@ -198,8 +198,7 @@ int cb_packager::calcUnpackSize(char *pkg) {
   cb_json j;
   int stt = j.getProp(pkg, "m", buff, sizeof(buff) - 1);
   if (stt != 0) return -2; // not a proper package
-  int buff_len = strlen(buff);
-  return ((buff_len * 3) / 4) - 16;
+  return strlen(buff);
 }
 
 int cb_packager::unpack(char *pkg, char *a, char *out, int out_len) {
