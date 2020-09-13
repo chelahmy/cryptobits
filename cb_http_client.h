@@ -13,7 +13,8 @@ class cb_http_client {
     cb_packager cbpack;
     String _id;
     String server_url;
-    String server_key;
+    String shared_key;
+    int packing_status;
     int post_response_code;
   public:
     cb_http_client();
@@ -22,6 +23,7 @@ class cb_http_client {
     void setUrl(String url);
     bool setKey(String key);
     int post(String message, String &respond);
+    int getPackingStatus();
     int getPostResponseCode();
 };
 
